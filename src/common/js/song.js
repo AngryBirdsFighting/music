@@ -31,7 +31,7 @@ export default class Song {
     })
   }
 }
-
+let a = ''
 export function createSong(musicData) {
   return new Song({
     id: musicData.songid,
@@ -41,7 +41,7 @@ export function createSong(musicData) {
     album: musicData.albumname,
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=46`
+    url: `http://dl.stream.qqmusic.qq.com/C400001Qu4I30eVFYb.m4a?vkey=082FE5D87584263BCA6A1A202903827E004E06DED4F170C958EC5326458FD1713BFCCDC11FC63BDB0B460D2D1EE9331B2EF6C6CFBE7C1F38&guid=5621121574&uin=0&fromtag=66${a++}`
   })
 }
 

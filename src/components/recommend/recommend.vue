@@ -30,6 +30,7 @@
            <v-loading></v-loading>     
         </div>      
        </v-scroll>
+       <router-view></router-view>
       </div>
   </div>
 </template>
@@ -40,6 +41,7 @@ import { ERR_OK } from 'api/config'
 import VSlider from 'base/slider/slider'
 import VScroll from 'base/scroll/scroll'
 import VLoading from 'base/loading/loading'
+import {mapMutations} from 'vuex'
 export default {
   data() {
     return {
@@ -60,6 +62,15 @@ export default {
         }
       })
     },
+    selectItem(item) {
+      this.$router.push({
+        path: `/recommend/${item.dissid}`
+      })
+      this.setDisc(item)
+    },
+    ...mapMutations({
+      setDisc: 'SET_DISC'
+    }),
     _getDiscList() {
       getDiscList().then(res => {
         if (res.code === ERR_OK) {

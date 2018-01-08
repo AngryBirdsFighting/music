@@ -1,27 +1,30 @@
 <template>
   <transition name="slide">
-    <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
+  <v-musiclist :title="title" :songs="songs" :bgImage="bgimage"></v-musiclist>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
-  import MusicList from 'components/music-list/music-list'
+  import {mapGetters} from 'vuex'
   import {getSingerDetail} from 'api/singer'
   import {ERR_OK} from 'api/config'
   import {createSong} from 'common/js/song'
-  import {mapGetters} from 'vuex'
+  import VMusiclist from 'components/music-list/music-list'
 
   export default {
     computed: {
+      ...mapGetters([
+        'singer'
+      ]),
       title() {
         return this.singer.name
       },
-      bgImage() {
+      bgimage() {
         return this.singer.avatar
-      },
-      ...mapGetters([
-        'singer'
-      ])
+      }
+    },
+    components: {
+      VMusiclist
     },
     data() {
       return {
@@ -47,15 +50,12 @@
         let ret = []
         list.forEach((item) => {
           let {musicData} = item
-          if (musicData.songid && musicData.albummid) {
+          if (musicData.songid && musicData.albumid) {
             ret.push(createSong(musicData))
           }
         })
         return ret
       }
-    },
-    components: {
-      MusicList
     }
   }
 </script>

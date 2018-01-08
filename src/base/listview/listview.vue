@@ -9,7 +9,7 @@
      <li v-for="group in data" class="list-group" ref="listGroup">
        <h2 class="list-group-title">{{group.title}}</h2>
        <ul>
-         <li v-for="item in group.items" class="list-group-item">
+         <li @click="selectItem(item)" v-for="item in group.items" class="list-group-item">
            <img class="avatar" v-lazy="item.avatar" alt="">
            <span class="name">{{item.name}}</span>
          </li>
@@ -25,7 +25,7 @@
       <div class="fixed-title">{{fixedTitle}} </div>
     </div>
     <div v-show="!data.length" class="loading-container">
-      <loading></loading>
+      <v-loading></v-loading>
     </div>
  </v-scroll>
 </template>
@@ -106,8 +106,6 @@
         }
       },
       _scrollTo(index) {
-        console.log(index + 'a')
-        console.info(this.listHeight.length)
         if (!index && index !== 0) {
           return
         }
